@@ -4,7 +4,7 @@
   "description": "backend del proyecto sena",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon run app/app.js"
+    "start": "node app/app.js"
   },
   "author": "Andres Leonardo Muñeton Escobar",
   "license": "ISC",
