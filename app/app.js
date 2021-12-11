@@ -1,28 +1,27 @@
 const express = require('express');
-const app = express();
 const morgan = require('morgan');
+const app = express();
+const server = require('http');
+server.createServer(app);
 const cors = require('cors');
-const bodyparser = require('body-parser');
-
-
-app.use('/api/', require('../routes/route.usuario'));
-
-app.use(morgan('start'));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-  next();
-});
-
-
-app.set('Port',1075);
-app.use(bodyparser.urlencoded({extends:true}));
-app.use(bodyparser.json());
-
-
-
-app.listen(app.get('Port'),()=>{
-  console.log('Servido activo: ',app.get('Port'))
+const bodyParser = require('body-parser');
+const port = process.env.PORT || 1075;
+var corsOptions = {
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  }
+  
+app.use(bodyParser.urlencoded({extends:true}));
+app.use(bodyParser.json());
+app.use('/login/',cors(corsOptions),morgan('dev'),require('./routes/routes.login'));
+app.use('/products/',cors(corsOptions),morgan('dev'),require('./routes/routes.producto'));
+app.use('/usuario/',cors(corsOptions),morgan('dev'),require('./routes/routes.usuario'));
+app.use('/movi/',cors(corsOptions),morgan('dev'),require('./routes/routes.transacciones'));
+app.use('/rol/',cors(corsOptions),morgan('dev'),require('./routes/routes.transacciones'));
+app.listen(port,()=>{
+    console.log('Servidor activo:',port)
 })
+
+
