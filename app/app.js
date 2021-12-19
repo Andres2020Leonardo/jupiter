@@ -17,8 +17,11 @@ app.use(bodyParser.urlencoded({extends:true}));
 app.use(bodyParser.json());
 app.use('/login/',cors(corsOptions),morgan('dev'),require('./routes/routes.login'));
 app.use('/products/',cors(corsOptions),morgan('dev'),require('./routes/routes.producto'));
+app.use('/products/count/',cors(corsOptions),morgan('dev'),require('./routes/routes.productosCount'));
 app.use('/usuario/',cors(corsOptions),morgan('dev'),require('./routes/routes.usuario'));
+app.use('/usuario/count/',cors(corsOptions),morgan('dev'),require('./routes/routes.usuarioCount'));
 app.use('/movi/',cors(corsOptions),morgan('dev'),require('./routes/routes.transacciones'));
+app.use('/movi/count/',cors(corsOptions),morgan('dev'),require('./routes/routes.transaccionesCount'));
 app.use('/rol/',cors(corsOptions),morgan('dev'),require('./routes/routes.transacciones'));
 app.listen(port,()=>{
     console.log('Servidor activo:',port)

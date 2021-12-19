@@ -1,6 +1,9 @@
 const producto = require('../models/Producto');
 const consultas = {};
-
+consultas.count = producto.count;
 consultas.all = producto.all;
-
+consultas.createProducto = producto.createProducto;
+consultas.deleteProducto = producto.deleteProducto;
+consultas.updateProducto = producto.updateProducto;
+consultas.saldo = producto.saldo;
 module.exports = consultas;
